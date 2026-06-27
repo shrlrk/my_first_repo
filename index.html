@@ -482,6 +482,20 @@
           <!-- Dynamically populated via JS -->
         </div>
       </section>
+
+      <!-- App Footer -->
+      <footer class="app-footer">
+        <div class="footer-links">
+          <button class="footer-link-btn" id="openTermsBtn">이용약관</button>
+          <span class="footer-divider">|</span>
+          <button class="footer-link-btn" id="openPrivacyBtn">개인정보처리방침</button>
+        </div>
+        <div class="footer-info">
+          <span>정보관리책임자: 홍길동 (admin@nebulatasks.com)</span>
+          <br>
+          <span class="copyright">Copyright © 2026 Nebula Tasks. All rights reserved.</span>
+        </div>
+      </footer>
     </main>
   </div>
 
@@ -620,6 +634,80 @@
     </div>
   </div>
 
+  <!-- TERMS OF SERVICE MODAL -->
+  <div class="modal-backdrop" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsModalTitle">
+    <div class="modal-card modal-lg">
+      <button class="modal-close-btn" id="termsCloseBtn" aria-label="닫기">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="modal-header">
+        <h3 class="modal-title" id="termsModalTitle">이용약관 (Terms of Service)</h3>
+      </div>
+      <div class="modal-body legal-content">
+        <h4>제1조 (목적)</h4>
+        <p>본 약관은 "Nebula Tasks"(이하 "서비스")가 제공하는 할 일 관리 및 데이터 동기화 서비스의 이용과 관련하여 운영자와 사용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+        
+        <h4>제2조 (서비스의 내용)</h4>
+        <p>서비스는 다음과 같은 기능을 제공합니다.</p>
+        <ol>
+          <li>할 일(Task)의 생성, 수정, 삭제 및 상태 관리</li>
+          <li>카테고리, 우선순위, 마감일 지정 기능</li>
+          <li>사용자 맞춤형 진행 상황 통계 및 대시보드</li>
+          <li>로컬 저장소(LocalStorage)를 이용한 오프라인 데모 모드</li>
+          <li>Firebase를 연동한 실시간 클라우드 데이터 동기화 (회원가입 및 로그인 시)</li>
+        </ol>
+
+        <h4>제3조 (사용자의 의무)</h4>
+        <p>1. 사용자는 회원가입 시 정확한 정보를 제공해야 하며, 계정 및 비밀번호의 보안에 대한 책임은 사용자 본인에게 있습니다.<br>
+        2. 사용자는 본 서비스를 불법적인 목적이나 타인의 권리를 침해하는 용도로 사용할 수 없습니다.<br>
+        3. 사용자는 "생성형 AI 윤리 핵심 가이드" 게이트에서 동의한 바와 같이, 디지털 시민성을 준수하고 건전하게 서비스를 이용해야 합니다.</p>
+
+        <h4>제4조 (서비스의 변경 및 중단)</h4>
+        <p>운영자는 서비스의 품질 향상을 위해 제공되는 기능의 일부 또는 전부를 수정, 변경, 또는 중단할 수 있습니다. 클라우드 서비스(Firebase) 연동을 통한 데이터 보관은 보장되지 않을 수 있으므로, 사용자는 중요한 데이터의 경우 별도로 백업할 책임이 있습니다.</p>
+
+        <h4>제5조 (면책 조항)</h4>
+        <p>운영자는 천재지변, 서버 장애, 사용자의 귀책사유로 인한 데이터 유실이나 서비스 이용의 장애에 대하여 책임을 지지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVACY POLICY MODAL -->
+  <div class="modal-backdrop" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+    <div class="modal-card modal-lg">
+      <button class="modal-close-btn" id="privacyCloseBtn" aria-label="닫기">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="modal-header">
+        <h3 class="modal-title" id="privacyModalTitle">개인정보처리방침 (Privacy Policy)</h3>
+      </div>
+      <div class="modal-body legal-content">
+        <h4>1. 처리하는 개인정보의 항목</h4>
+        <p>본 서비스는 다음의 개인정보를 수집 및 처리합니다.</p>
+        <ul>
+          <li><strong>로컬 데모 모드 이용 시 (게스트):</strong> 수집하는 개인정보 없음 (모든 데이터는 사용자의 기기 LocalStorage에만 저장됩니다.)</li>
+          <li><strong>회원가입 및 클라우드 동기화 이용 시:</strong> 필수 항목(이메일 주소, 비밀번호, 사용자 이름), 서비스 이용 기록(입력한 할 일 데이터 등)</li>
+        </ul>
+
+        <h4>2. 개인정보의 처리 목적</h4>
+        <p>수집된 개인정보는 다음의 목적을 위해서만 활용됩니다.</p>
+        <ol>
+          <li><strong>회원 관리:</strong> 본인 확인, 개인 식별, 불량 회원의 부정 이용 방지</li>
+          <li><strong>서비스 제공:</strong> 사용자의 할 일 데이터 클라우드 저장 및 기기 간 동기화</li>
+          <li><strong>서비스 개선:</strong> 통계 데이터 기반의 신규 기능 개발 및 UI/UX 개선</li>
+        </ol>
+
+        <h4>3. 개인정보의 보유 및 이용 기간</h4>
+        <p>원칙적으로, 개인정보 처리 목적이 달성되거나 사용자가 회원 탈퇴를 요청할 경우 해당 개인정보는 지체 없이 파기됩니다. 단, 관계 법령의 규정에 의하여 보존할 필요가 있는 경우 관련 법령에서 정한 기간 동안 보관합니다.</p>
+
+        <h4>4. 개인정보의 파기 절차 및 방법</h4>
+        <p>사용자가 계정 삭제를 요청하는 경우, 클라우드(Firebase) 데이터베이스에 저장된 사용자의 계정 정보와 모든 할 일 데이터는 복구 불가능한 방법으로 영구 삭제됩니다. 로컬 기기에 저장된 데이터는 브라우저 캐시 및 LocalStorage 삭제를 통해 파기할 수 파기할 수 있습니다.</p>
+
+        <h4>5. 개인정보 보호를 위한 기술적 대책</h4>
+        <p>본 서비스는 사용자의 비밀번호를 암호화하여 저장하며, Firebase Authentication의 강력한 보안 솔루션을 활용하여 사용자의 데이터를 안전하게 보호합니다.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST NOTIFICATION CONTAINER -->
   <div class="toast-container" id="toastContainer"></div>
 
@@ -677,6 +765,49 @@
 
       // 게이트가 있는 동안 body 스크롤 막기
       document.body.style.overflow = 'hidden';
+    })();
+
+    // Legal Modals Logic
+    (function() {
+      const termsModal = document.getElementById('termsModal');
+      const privacyModal = document.getElementById('privacyModal');
+      const openTermsBtn = document.getElementById('openTermsBtn');
+      const openPrivacyBtn = document.getElementById('openPrivacyBtn');
+      const termsCloseBtn = document.getElementById('termsCloseBtn');
+      const privacyCloseBtn = document.getElementById('privacyCloseBtn');
+
+      function openModal(modal) {
+        modal.classList.add('show');
+        // Prevent body scroll only if not already prevented by gate
+        if (document.body.style.overflow !== 'hidden') {
+          document.body.style.overflow = 'hidden';
+          document.body.dataset.modalOpen = 'true';
+        }
+      }
+
+      function closeModal(modal) {
+        modal.classList.remove('show');
+        if (document.body.dataset.modalOpen === 'true') {
+          document.body.style.overflow = '';
+          document.body.dataset.modalOpen = 'false';
+        }
+      }
+
+      openTermsBtn.addEventListener('click', () => openModal(termsModal));
+      openPrivacyBtn.addEventListener('click', () => openModal(privacyModal));
+
+      termsCloseBtn.addEventListener('click', () => closeModal(termsModal));
+      privacyCloseBtn.addEventListener('click', () => closeModal(privacyModal));
+
+      // Close on backdrop click
+      [termsModal, privacyModal].forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal(modal);
+        });
+      });
+      
+      // Update Lucide icons for new modals
+      lucide.createIcons();
     })();
   </script>
 </body>

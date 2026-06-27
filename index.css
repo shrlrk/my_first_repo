@@ -2058,3 +2058,93 @@ body {
   .gate-start-btn { justify-content: center; }
 }
 
+/* ==========================================================================
+   FOOTER & LEGAL MODALS
+   ========================================================================== */
+
+/* App Footer */
+.app-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-link-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-family: inherit;
+  padding: 0;
+}
+
+.footer-link-btn:hover {
+  color: var(--color-primary-light);
+  text-decoration: underline;
+}
+
+.footer-divider {
+  color: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+}
+
+.footer-info {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.6;
+}
+
+.footer-info .copyright {
+  font-family: var(--font-heading);
+}
+
+/* Legal Modals Content Styling */
+.legal-content {
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.legal-content h4 {
+  color: var(--color-primary-light);
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-family: var(--font-heading);
+}
+
+.legal-content h4:first-child {
+  margin-top: 0;
+}
+
+.legal-content p, .legal-content ul, .legal-content ol {
+  margin-bottom: 16px;
+  color: var(--text-muted);
+}
+
+.legal-content ul, .legal-content ol {
+  padding-left: 24px;
+}
+
+.legal-content li {
+  margin-bottom: 8px;
+}
+
+.modal-lg {
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+}
