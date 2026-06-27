@@ -2083,8 +2083,9 @@ body {
 .footer-link-btn {
   background: none;
   border: none;
-  color: var(--text-muted);
-  font-size: 13px;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   transition: color 0.2s ease;
   font-family: inherit;
@@ -2097,8 +2098,9 @@ body {
 }
 
 .footer-divider {
-  color: rgba(255, 255, 255, 0.1);
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .footer-info {
