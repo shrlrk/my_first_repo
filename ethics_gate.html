@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤리 가이드 게이트</title>
+    <style>
+        :root {
+            --primary-color: #f39c12;
+            --secondary-color: #27ae60;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scrolling behind the modal */
+        }
+
+        /* Gate Modal Overlay */
+        .gate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .gate-container {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .gate-header {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+            color: white;
+            padding: 24px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .gate-content {
+            padding: 30px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .guide-item {
+            margin-bottom: 24px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #fdfbf7;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .guide-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .guide-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #d35400;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .guide-title-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .guide-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .gate-footer {
+            padding: 24px 30px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            user-select: none;
+        }
+
+        .checkbox-container input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+        }
+
+        .start-btn {
+            background: #bdc3c7;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .start-btn.active {
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+        }
+
+        .start-btn.active:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+        }
+        
+        .start-btn.active:active {
+            transform: translateY(0);
+        }
+
+        /* Main Game Screen (Hidden initially) */
+        .main-game {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .main-game h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Main Game Content -->
+    <div class="main-game" id="mainGame">
+        <h1>본 게임에 오신 것을 환영합니다!</h1>
+        <p>윤리 가이드를 숙지해 주셔서 감사합니다. 이제 게임을 즐겨주세요.</p>
+    </div>
+
+    <!-- Ethics Gate Overlay -->
+    <div class="gate-overlay" id="gateOverlay">
+        <div class="gate-container">
+            <div class="gate-header">
+                생성형 AI 활용 윤리 핵심 가이드
+            </div>
+            
+            <div class="gate-content" id="gateContent">
+                <div class="guide-item">
+                    <div class="guide-title"><span class="guide-title-badge">가이드 1</span> 생성형 AI 활용의 목적과 범위를 스스로 설정하고 책임져요.</div>
+                    <div class="guide-desc">생성형 AI를 어떤 목적으로, 어느 범위까지 활용할지 스스로 기준을 세워요. 그 기준이 상황마다 흔들린다면, 생성형 AI를 활용하는 게 아니라 끌려다니는 거예요. 활용한 결과에 대한 책임은 언제나 나에게 있어요.</div>
+                </div>
+
+                <div class="guide-item">
+                    <div class="guide-title"><span class="guide-title-badge">가이드 2</span> 내가 먼저 시도하고, 생성형 AI의 결과물에 나만의 통찰을 담아 완성해요.</div>
+                    <div class="guide-desc">생성형 AI는 훌륭한 도구일 뿐, 나를 대신할 수는 없어요. 생성형 AI에게 묻기 전, 주제에 대해 나의 가설이나 논리 구조를 먼저 세워요. 생성형 AI의 결과물이 나오면, 그대로 복사하지 않고 나의 경험, 비판적 시각, 독창적인 해석을 덧입혀 나만의 색깔을 담아 최종 결과물을 만들어요.</div>
+                </div>
+
+                <div class="guide-item">
+                    <div class="guide-title"><span class="guide-title-badge">가이드 3</span> 생성형 AI의 한계를 분석하고, 자료를 찾아 결과물을 비판적으로 검증해요.</div>
+                    <div class="guide-desc">생성형 AI는 확률적으로 그럴싸한 답변을 내놓을 뿐, 항상 진실만을 말하지는 않아요. 생성형 AI가 제시한 수치, 인물, 사건이 사실인지 반드시 교과서, 원본, 공신력 있는 기관의 자료를 통해 교차 검증해요. 생성형 AI의 답변 속 숨겨진 편향성을 찾아내고, 중립적인 시각에서 정보를 재구성해요.</div>
+                </div>
+
+                <div class="guide-item">
+                    <div class="guide-title"><span class="guide-title-badge">가이드 4</span> 생성형 AI를 보조 도구로 삼아 사고의 범위와 깊이를 확장해요.</div>
+                    <div class="guide-desc">생성형 AI를 '내 사고를 확장하는 지적 대화 파트너'로 활용해요. '나의 생각에 대한 반론을 제시해 줘', '다른 관점에서 나의 생각을 분석해줘'와 같은 심화 질문을 통해 생각의 범위를 넓혀요. 혼자 해결하기 어려운 복잡한 데이터나 추상적인 개념을 이해할 때는 생성형 AI를 보조도구로 활용하여 깊이를 더해요.</div>
+                </div>
+
+                <div class="guide-item" style="border-left-color: #3498db;">
+                    <div class="guide-title" style="color: #2980b9;"><span class="guide-title-badge" style="background: #3498db;">가이드 5</span> 데이터 보안과 정서적 자립을 통해 디지털 시민성을 완성해요.</div>
+                    <div class="guide-desc">나 또는 타인의 민감한 정보를 생성형 AI에 입력하지 않으며, 공용기기 로그아웃 등 기본 보안 수칙을 잘 지켜요. 생성형 AI가 주는 편리함이나 인위적 공감에 매몰되지 않도록 정서적 주체성을 잃지 않도록 주의해요. 선생님 또는 친구와의 실제적인 교류와 토론을 통해 건강한 자아를 확립하고 정서적 독립을 유지해요.</div>
+                </div>
+
+                <div class="guide-item" style="border-left-color: #9b59b6;">
+                    <div class="guide-title" style="color: #8e44ad;"><span class="guide-title-badge" style="background: #9b59b6;">가이드 6</span> 생성형 AI 활용 사실을 투명하게 공개하며 학술적 정직성을 실천해요.</div>
+                    <div class="guide-desc">어떤 단계에서 어떤 생성형 AI를 사용했는지, 프롬프트는 무엇이었는지 명확히 기록해요. 생성형 AI의 도움을 받은 부분을 투명하게 밝힘으로써 자신의 노력이 들어간 부분과 생성형 AI의 기여를 구분하고, 표절 시비로부터 나의 학문적 정당성을 보호해요.</div>
+                </div>
+            </div>
+
+            <div class="gate-footer">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="agreeCheckbox">
+                    위 윤리 핵심 가이드를 모두 읽고 이해하였으며, 이를 지키겠습니다.
+                </label>
+                <button class="start-btn" id="startBtn" disabled>게임 시작하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const agreeCheckbox = document.getElementById('agreeCheckbox');
+        const startBtn = document.getElementById('startBtn');
+        const gateOverlay = document.getElementById('gateOverlay');
+        const mainGame = document.getElementById('mainGame');
+
+        // Checkbox interaction
+        agreeCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                startBtn.disabled = false;
+                startBtn.classList.add('active');
+            } else {
+                startBtn.disabled = true;
+                startBtn.classList.remove('active');
+            }
+        });
+
+        // Start button click
+        startBtn.addEventListener('click', function() {
+            if (!this.disabled) {
+                // Fade out the overlay
+                gateOverlay.style.opacity = '0';
+                
+                // After fade animation, hide overlay and show main game
+                setTimeout(() => {
+                    gateOverlay.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                    mainGame.style.display = 'flex';
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>
