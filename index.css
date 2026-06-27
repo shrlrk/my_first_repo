@@ -2118,6 +2118,9 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   font-size: 14px;
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: 8px;
 }
 
 .legal-content h4 {
